@@ -40,19 +40,12 @@ namespace GetDeviceInfor
 
         static string hashToUUID(string input)
         {
-            using (SHA256 sha256 = SHA256.Create())
+            using (SHA1 sha1 = SHA1.Create())
             {
-                byte[] bytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = sha256.ComputeHash(bytes);
-
-                StringBuilder hashString = new StringBuilder();
-                foreach (byte b in hashBytes)
-                {
-                    hashString.Append(b.ToString("x2"));
-                }
-
-                string hex = hashString.ToString();
-                return $"{hex.Substring(0, 8)}-{hex.Substring(8, 4)}-{hex.Substring(12, 4)}-{hex.Substring(16, 4)}-{hex.Substring(20, 12)}";
+                byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes(input));
+                byte[] truncatedHash = new byte[16];
+                Array.Copy(hash, truncatedHash, 16);
+                return new Guid(truncatedHash).ToString();
             }
         }
 
