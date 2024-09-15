@@ -15,11 +15,9 @@ namespace GetDeviceInfor
             {
                 string filePath = @"D:\Project\CSharp\GetDeviceInfor\GetDeviceInfor\licenseKey.txt";
                 string licenseKey = getLicenceKey(filePath);
-                Console.WriteLine("License Key: " + licenseKey);
+                //Console.WriteLine("License Key: " + licenseKey);
 
                 string licenseKeyGenerate = generateLicenceKey();
-                //string hashedUUID = HashToUUID(licenseKeyGenerate);
-                //Console.WriteLine("UUID from License Key: " + hashedUUID);
 
                 if (string.IsNullOrWhiteSpace(licenseKey))
                 {
@@ -40,7 +38,7 @@ namespace GetDeviceInfor
             }
         }
 
-        static string HashToUUID(string input)
+        static string hashToUUID(string input)
         {
             using (SHA256 sha256 = SHA256.Create())
             {
@@ -75,13 +73,13 @@ namespace GetDeviceInfor
 
         static string generateLicenceKey()
         {
-            string macAddress = GetMacAddress();
-            string motherboardId = GetMotherboardId();
-            string hardDriveId = GetHardDriveId();
-            string cpuId = GetCpuId();
+            string macAddress = getMacAddress();
+            string motherboardId = getMotherboardId();
+            string hardDriveId = getHardDriveId();
+            string cpuId = getCpuId();
             string fileCreationTime = GetFileCreationTime(@"D:\Project\CSharp\GetDeviceInfor\GetDeviceInfor\licenseKey.txt");
             string combinedString = macAddress + motherboardId + hardDriveId + cpuId + fileCreationTime;
-            string licenseKeyGenerate = HashToUUID(GenerateSHA256Hash(combinedString));
+            string licenseKeyGenerate = hashToUUID(generateSHA256Hash(combinedString));
             Console.WriteLine("Generated License Key: " + licenseKeyGenerate);
             return licenseKeyGenerate;
         }
@@ -110,7 +108,7 @@ namespace GetDeviceInfor
             return licenceKey ?? string.Empty;
         }
 
-        static string GetMacAddress()
+        static string getMacAddress()
         {
             foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
             {
@@ -122,7 +120,7 @@ namespace GetDeviceInfor
             return string.Empty;
         }
 
-        static string GetMotherboardId()
+        static string getMotherboardId()
         {
             string motherboardId = string.Empty;
             try
@@ -130,7 +128,7 @@ namespace GetDeviceInfor
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_BaseBoard");
                 foreach (ManagementObject mo in searcher.Get())
                 {
-                    motherboardId = mo["SerialNumber"].ToString();
+                   return mo["SerialNumber"].ToString();
                 }
             }
             catch (Exception ex)
@@ -140,7 +138,7 @@ namespace GetDeviceInfor
             return motherboardId;
         }
 
-        static string GetHardDriveId()
+        static string getHardDriveId()
         {
             string hardDriveId = string.Empty;
             try
@@ -148,7 +146,7 @@ namespace GetDeviceInfor
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT SerialNumber FROM Win32_DiskDrive");
                 foreach (ManagementObject mo in searcher.Get())
                 {
-                    hardDriveId = mo["SerialNumber"].ToString();
+                    return mo["SerialNumber"].ToString();
                 }
             }
             catch (Exception ex)
@@ -158,7 +156,7 @@ namespace GetDeviceInfor
             return hardDriveId;
         }
 
-        static string GetCpuId()
+        static string getCpuId()
         {
             string cpuId = string.Empty;
             try
@@ -166,7 +164,7 @@ namespace GetDeviceInfor
                 ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT ProcessorId FROM Win32_Processor");
                 foreach (ManagementObject mo in searcher.Get())
                 {
-                    cpuId = mo["ProcessorId"].ToString();
+                    return mo["ProcessorId"].ToString();
                 }
             }
             catch (Exception ex)
@@ -186,7 +184,7 @@ namespace GetDeviceInfor
             return string.Empty;
         }
 
-        static string GenerateSHA256Hash(string input)
+        static string generateSHA256Hash(string input)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
