@@ -70,7 +70,7 @@ namespace GetDeviceInfor
             string motherboardId = getMotherboardId();
             string hardDriveId = getHardDriveId();
             string cpuId = getCpuId();
-            string fileCreationTime = GetFileCreationTime(@"D:\Project\CSharp\GetDeviceInfor\GetDeviceInfor\licenseKey.txt");
+            string fileCreationTime = GetFileCreationTime(@"D:\Project\CSharp\GetDeviceInfor\GetDeviceInfor\test.txt");
             string combinedString = macAddress + motherboardId + hardDriveId + cpuId + fileCreationTime;
             string licenseKeyGenerate = hashToUUID(generateSHA256Hash(combinedString));
             Console.WriteLine("Generated License Key: " + licenseKeyGenerate);
