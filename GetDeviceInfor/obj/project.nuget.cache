@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "athKokHCRS2DTiSTzv7a7ELeS4qX3RXcAJk9/vgf7bQQgyCQ8abYmt9amQyUFn70rif6yVahRjvtPZ2z7XBHgA==",
+  "success": true,
+  "projectFilePath": "D:\\Project\\CSharp\\GetDeviceInfor\\GetDeviceInfor\\GetDeviceInfor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\phamh\\.nuget\\packages\\system.codedom\\8.0.0\\system.codedom.8.0.0.nupkg.sha512",
+    "C:\\Users\\phamh\\.nuget\\packages\\system.management\\8.0.0\\system.management.8.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
